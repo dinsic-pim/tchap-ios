@@ -52,15 +52,6 @@
 #import "RoomIncomingAttachmentWithoutSenderInfoBubbleCell.h"
 #import "RoomIncomingAttachmentWithPaginationTitleBubbleCell.h"
 
-#import "RoomIncomingEncryptedTextMsgBubbleCell.h"
-#import "RoomIncomingEncryptedTextMsgWithoutSenderInfoBubbleCell.h"
-#import "RoomIncomingEncryptedTextMsgWithPaginationTitleBubbleCell.h"
-#import "RoomIncomingEncryptedTextMsgWithoutSenderNameBubbleCell.h"
-#import "RoomIncomingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.h"
-#import "RoomIncomingEncryptedAttachmentBubbleCell.h"
-#import "RoomIncomingEncryptedAttachmentWithoutSenderInfoBubbleCell.h"
-#import "RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell.h"
-
 #import "RoomOutgoingTextMsgBubbleCell.h"
 #import "RoomOutgoingTextMsgWithoutSenderInfoBubbleCell.h"
 #import "RoomOutgoingTextMsgWithPaginationTitleBubbleCell.h"
@@ -69,15 +60,6 @@
 #import "RoomOutgoingAttachmentBubbleCell.h"
 #import "RoomOutgoingAttachmentWithoutSenderInfoBubbleCell.h"
 #import "RoomOutgoingAttachmentWithPaginationTitleBubbleCell.h"
-
-#import "RoomOutgoingEncryptedTextMsgBubbleCell.h"
-#import "RoomOutgoingEncryptedTextMsgWithoutSenderInfoBubbleCell.h"
-#import "RoomOutgoingEncryptedTextMsgWithPaginationTitleBubbleCell.h"
-#import "RoomOutgoingEncryptedTextMsgWithoutSenderNameBubbleCell.h"
-#import "RoomOutgoingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.h"
-#import "RoomOutgoingEncryptedAttachmentBubbleCell.h"
-#import "RoomOutgoingEncryptedAttachmentWithoutSenderInfoBubbleCell.h"
-#import "RoomOutgoingEncryptedAttachmentWithPaginationTitleBubbleCell.h"
 
 #import "RoomMembershipBubbleCell.h"
 #import "RoomMembershipWithPaginationTitleBubbleCell.h"
@@ -89,9 +71,6 @@
 #import "RoomAttachmentAntivirusScanStatusBubbleCell.h"
 #import "RoomAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.h"
 #import "RoomAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.h"
-#import "RoomEncryptedAttachmentAntivirusScanStatusBubbleCell.h"
-#import "RoomEncryptedAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.h"
-#import "RoomEncryptedAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.h"
 
 #import "RoomSelectedStickerBubbleCell.h"
 #import "RoomPredecessorBubbleCell.h"
@@ -103,9 +82,6 @@
 #import "WidgetManager.h"
 
 #import "GBDeviceInfo_iOS.h"
-
-#import "RoomEncryptedDataBubbleCell.h"
-#import "EncryptionInfoView.h"
 
 #import "MXRoom+Riot.h"
 
@@ -144,9 +120,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
     UILabel *missedDiscussionsBadgeLabel;
     UIView  *missedDiscussionsBadgeLabelBgView;
     UIView  *missedDiscussionsBarButtonCustomView;
-    
-    // Potential encryption details view.
-    EncryptionInfoView *encryptionInfoView;
     
     // The list of unknown devices that prevent outgoing messages from being sent
     MXUsersDevicesMap<MXDeviceInfo*> *unknownDevices;
@@ -335,15 +308,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
     [self.bubblesTableView registerClass:RoomIncomingTextMsgWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomIncomingTextMsgWithoutSenderNameBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerClass:RoomIncomingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomIncomingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.defaultReuseIdentifier];
     
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedTextMsgBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedTextMsgBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedTextMsgWithoutSenderInfoBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedTextMsgWithoutSenderInfoBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedTextMsgWithPaginationTitleBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedTextMsgWithPaginationTitleBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedAttachmentBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedAttachmentBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedAttachmentWithoutSenderInfoBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedAttachmentWithoutSenderInfoBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedTextMsgWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedTextMsgWithoutSenderNameBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomIncomingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomIncomingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.defaultReuseIdentifier];
-    
     [self.bubblesTableView registerClass:RoomOutgoingAttachmentBubbleCell.class forCellReuseIdentifier:RoomOutgoingAttachmentBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerClass:RoomOutgoingAttachmentWithoutSenderInfoBubbleCell.class forCellReuseIdentifier:RoomOutgoingAttachmentWithoutSenderInfoBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerClass:RoomOutgoingAttachmentWithPaginationTitleBubbleCell.class forCellReuseIdentifier:RoomOutgoingAttachmentWithPaginationTitleBubbleCell.defaultReuseIdentifier];
@@ -352,15 +316,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
     [self.bubblesTableView registerClass:RoomOutgoingTextMsgWithPaginationTitleBubbleCell.class forCellReuseIdentifier:RoomOutgoingTextMsgWithPaginationTitleBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerClass:RoomOutgoingTextMsgWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomOutgoingTextMsgWithoutSenderNameBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerClass:RoomOutgoingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomOutgoingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.defaultReuseIdentifier];
-    
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedAttachmentBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedAttachmentBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedAttachmentWithoutSenderInfoBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedAttachmentWithoutSenderInfoBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedAttachmentWithPaginationTitleBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedAttachmentWithPaginationTitleBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedTextMsgBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedTextMsgBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedTextMsgWithoutSenderInfoBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedTextMsgWithoutSenderInfoBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedTextMsgWithPaginationTitleBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedTextMsgWithPaginationTitleBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedTextMsgWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedTextMsgWithoutSenderNameBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerClass:RoomOutgoingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class forCellReuseIdentifier:RoomOutgoingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.defaultReuseIdentifier];
     
     [self.bubblesTableView registerClass:RoomEmptyBubbleCell.class forCellReuseIdentifier:RoomEmptyBubbleCell.defaultReuseIdentifier];
     
@@ -377,10 +332,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
     [self.bubblesTableView registerNib:RoomAttachmentAntivirusScanStatusBubbleCell.nib forCellReuseIdentifier:RoomAttachmentAntivirusScanStatusBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerNib:RoomAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.nib forCellReuseIdentifier:RoomAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerNib:RoomAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.nib forCellReuseIdentifier:RoomAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.defaultReuseIdentifier];
-    
-    [self.bubblesTableView registerNib:RoomEncryptedAttachmentAntivirusScanStatusBubbleCell.nib forCellReuseIdentifier:RoomEncryptedAttachmentAntivirusScanStatusBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerNib:RoomEncryptedAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.nib forCellReuseIdentifier:RoomEncryptedAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.defaultReuseIdentifier];
-    [self.bubblesTableView registerNib:RoomEncryptedAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.nib forCellReuseIdentifier:RoomEncryptedAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.defaultReuseIdentifier];
     
     [self.bubblesTableView registerClass:KeyVerificationIncomingRequestApprovalBubbleCell.class forCellReuseIdentifier:KeyVerificationIncomingRequestApprovalBubbleCell.defaultReuseIdentifier];
     [self.bubblesTableView registerClass:KeyVerificationIncomingRequestApprovalWithPaginationTitleBubbleCell.class forCellReuseIdentifier:KeyVerificationIncomingRequestApprovalWithPaginationTitleBubbleCell.defaultReuseIdentifier];
@@ -630,18 +581,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
     self.bubblesTableView.contentInset = contentInset;
     
     // Check here whether a subview has been added or removed
-    if (encryptionInfoView)
-    {
-        if (!encryptionInfoView.superview)
-        {
-            // Reset
-            encryptionInfoView = nil;
-            
-            // Reload the full table to take into account a potential change on a device status.
-            [self.bubblesTableView reloadData];
-        }
-    }
-    
     if (eventDetailsView)
     {
         if (!eventDetailsView.superview)
@@ -1024,12 +963,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
 - (void)dismissTemporarySubViews
 {
     [super dismissTemporarySubViews];
-    
-    if (encryptionInfoView)
-    {
-        [encryptionInfoView removeFromSuperview];
-        encryptionInfoView = nil;
-    }
 }
 
 - (void)setBubbleTableViewDisplayInTransition:(BOOL)bubbleTableViewDisplayInTransition
@@ -1837,35 +1770,26 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
 - (Class<MXKCellRendering>)cellViewClassForCellData:(MXKCellData*)cellData
 {
     Class cellViewClass = nil;
-    BOOL showEncryptionBadge = NO;
     
     // Sanity check
     if ([cellData conformsToProtocol:@protocol(MXKRoomBubbleCellDataStoring)])
     {
         id<MXKRoomBubbleCellDataStoring> bubbleData = (id<MXKRoomBubbleCellDataStoring>)cellData;
         
-        // Tchap: We hide all encryption icons in all bubbles for the moment (-> we don't use RoomxxxEncryptedxxxBubbleCell cell)
-//        MXKRoomBubbleCellData *roomBubbleCellData;
-//        if ([bubbleData isKindOfClass:MXKRoomBubbleCellData.class])
-//        {
-//            roomBubbleCellData = (MXKRoomBubbleCellData*)bubbleData;
-//            showEncryptionBadge = roomBubbleCellData.containsBubbleComponentWithEncryptionBadge;
-//        }
-        
         // Select the suitable table view cell class
         if (bubbleData.showAntivirusScanStatus)
         {
             if (bubbleData.isPaginationFirstBubble)
             {
-                cellViewClass = showEncryptionBadge ? RoomEncryptedAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.class : RoomAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.class;
+                cellViewClass = RoomAttachmentAntivirusScanStatusWithPaginationTitleBubbleCell.class;
             }
             else if (bubbleData.shouldHideSenderInformation)
             {
-                cellViewClass = showEncryptionBadge ? RoomEncryptedAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.class : RoomAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.class;
+                cellViewClass = RoomAttachmentAntivirusScanStatusWithoutSenderInfoBubbleCell.class;
             }
             else
             {
-                cellViewClass = showEncryptionBadge ? RoomEncryptedAttachmentAntivirusScanStatusBubbleCell.class : RoomAttachmentAntivirusScanStatusBubbleCell.class;
+                cellViewClass = RoomAttachmentAntivirusScanStatusBubbleCell.class;
             }
         }
         else if (bubbleData.hasNoDisplay)
@@ -1928,15 +1852,15 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
                 }
                 else if (bubbleData.isPaginationFirstBubble)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell.class : RoomIncomingAttachmentWithPaginationTitleBubbleCell.class;
+                    cellViewClass = RoomIncomingAttachmentWithPaginationTitleBubbleCell.class;
                 }
                 else if (bubbleData.shouldHideSenderInformation)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedAttachmentWithoutSenderInfoBubbleCell.class : RoomIncomingAttachmentWithoutSenderInfoBubbleCell.class;
+                    cellViewClass = RoomIncomingAttachmentWithoutSenderInfoBubbleCell.class;
                 }
                 else
                 {
-                    cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedAttachmentBubbleCell.class : RoomIncomingAttachmentBubbleCell.class;
+                    cellViewClass = RoomIncomingAttachmentBubbleCell.class;
                 }
             }
             else
@@ -1945,24 +1869,24 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
                 {
                     if (bubbleData.shouldHideSenderName)
                     {
-                        cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class : RoomIncomingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class;
+                        cellViewClass = RoomIncomingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class;
                     }
                     else
                     {
-                        cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedTextMsgWithPaginationTitleBubbleCell.class : RoomIncomingTextMsgWithPaginationTitleBubbleCell.class;
+                        cellViewClass = RoomIncomingTextMsgWithPaginationTitleBubbleCell.class;
                     }
                 }
                 else if (bubbleData.shouldHideSenderInformation)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedTextMsgWithoutSenderInfoBubbleCell.class : RoomIncomingTextMsgWithoutSenderInfoBubbleCell.class;
+                    cellViewClass = RoomIncomingTextMsgWithoutSenderInfoBubbleCell.class;
                 }
                 else if (bubbleData.shouldHideSenderName)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedTextMsgWithoutSenderNameBubbleCell.class : RoomIncomingTextMsgWithoutSenderNameBubbleCell.class;
+                    cellViewClass = RoomIncomingTextMsgWithoutSenderNameBubbleCell.class;
                 }
                 else
                 {
-                    cellViewClass = showEncryptionBadge ? RoomIncomingEncryptedTextMsgBubbleCell.class : RoomIncomingTextMsgBubbleCell.class;
+                    cellViewClass = RoomIncomingTextMsgBubbleCell.class;
                 }
             }
         }
@@ -1978,15 +1902,15 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
                 }
                 else if (bubbleData.isPaginationFirstBubble)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedAttachmentWithPaginationTitleBubbleCell.class :RoomOutgoingAttachmentWithPaginationTitleBubbleCell.class;
+                    cellViewClass = RoomOutgoingAttachmentWithPaginationTitleBubbleCell.class;
                 }
                 else if (bubbleData.shouldHideSenderInformation)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedAttachmentWithoutSenderInfoBubbleCell.class : RoomOutgoingAttachmentWithoutSenderInfoBubbleCell.class;
+                    cellViewClass = RoomOutgoingAttachmentWithoutSenderInfoBubbleCell.class;
                 }
                 else
                 {
-                    cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedAttachmentBubbleCell.class : RoomOutgoingAttachmentBubbleCell.class;
+                    cellViewClass = RoomOutgoingAttachmentBubbleCell.class;
                 }
             }
             else
@@ -1995,24 +1919,24 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
                 {
                     if (bubbleData.shouldHideSenderName)
                     {
-                        cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class : RoomOutgoingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class;
+                        cellViewClass = RoomOutgoingTextMsgWithPaginationTitleWithoutSenderNameBubbleCell.class;
                     }
                     else
                     {
-                        cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedTextMsgWithPaginationTitleBubbleCell.class : RoomOutgoingTextMsgWithPaginationTitleBubbleCell.class;
+                        cellViewClass = RoomOutgoingTextMsgWithPaginationTitleBubbleCell.class;
                     }
                 }
                 else if (bubbleData.shouldHideSenderInformation)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedTextMsgWithoutSenderInfoBubbleCell.class :RoomOutgoingTextMsgWithoutSenderInfoBubbleCell.class;
+                    cellViewClass = RoomOutgoingTextMsgWithoutSenderInfoBubbleCell.class;
                 }
                 else if (bubbleData.shouldHideSenderName)
                 {
-                    cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedTextMsgWithoutSenderNameBubbleCell.class : RoomOutgoingTextMsgWithoutSenderNameBubbleCell.class;
+                    cellViewClass = RoomOutgoingTextMsgWithoutSenderNameBubbleCell.class;
                 }
                 else
                 {
-                    cellViewClass = showEncryptionBadge ? RoomOutgoingEncryptedTextMsgBubbleCell.class : RoomOutgoingTextMsgBubbleCell.class;
+                    cellViewClass = RoomOutgoingTextMsgBubbleCell.class;
                 }
             }
         }
@@ -2181,16 +2105,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
             {
                 // Keep default implementation
                 [super dataSource:dataSource didRecognizeAction:actionIdentifier inCell:cell userInfo:userInfo];
-            }
-        }
-        else if ([actionIdentifier isEqualToString:kRoomEncryptedDataBubbleCellTapOnEncryptionIcon])
-        {
-            // Retrieve the tapped event
-            MXEvent *tappedEvent = userInfo[kMXKRoomBubbleCellEventKey];
-            
-            if (tappedEvent)
-            {
-                [self showEncryptionInformation:tappedEvent];
             }
         }
         else if ([actionIdentifier isEqualToString:kMXKRoomBubbleCellTapOnReceiptsContainer])
@@ -2848,24 +2762,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
             }]];
 
         }
-                
-//        if (self.roomDataSource.room.summary.isEncrypted)
-//        {
-//            [currentAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"room_event_action_view_encryption", @"Vector", nil)
-//                                                             style:UIAlertActionStyleDefault
-//                                                           handler:^(UIAlertAction * action) {
-//
-//                                                               if (weakSelf)
-//                                                               {
-//                                                                   typeof(self) self = weakSelf;
-//                                                                   [self cancelEventSelection];
-//
-//                                                                   // Display encryption details
-//                                                                   [self showEncryptionInformation:selectedEvent];
-//                                                               }
-//
-//                                                           }]];
-//        }
     }
     
     [currentAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"cancel", @"Vector", nil)
@@ -4518,61 +4414,6 @@ NSString *const RoomErrorDomain = @"RoomErrorDomain";
         }
     }
 }
-
-# pragma mark - Encryption Information view
-
-- (void)showEncryptionInformation:(MXEvent *)event
-{
-    [self dismissKeyboard];
-    
-    // Remove potential existing subviews
-    [self dismissTemporarySubViews];
-    
-    encryptionInfoView = [[EncryptionInfoView alloc] initWithEvent:event andMatrixSession:self.roomDataSource.mxSession];
-    
-    // Add shadow on added view
-    encryptionInfoView.layer.cornerRadius = 5;
-    encryptionInfoView.layer.shadowOffset = CGSizeMake(0, 1);
-    encryptionInfoView.layer.shadowOpacity = 0.5f;
-    
-    // Add the view and define edge constraints
-    [self.view addSubview:encryptionInfoView];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:encryptionInfoView
-                                                          attribute:NSLayoutAttributeTop
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.topLayoutGuide
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1.0f
-                                                           constant:10.0f]];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:encryptionInfoView
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.bottomLayoutGuide
-                                                          attribute:NSLayoutAttributeTop
-                                                         multiplier:1.0f
-                                                           constant:-10.0f]];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
-                                                          attribute:NSLayoutAttributeLeading
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:encryptionInfoView
-                                                          attribute:NSLayoutAttributeLeading
-                                                         multiplier:1.0f
-                                                           constant:-10.0f]];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view
-                                                          attribute:NSLayoutAttributeTrailing
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:encryptionInfoView
-                                                          attribute:NSLayoutAttributeTrailing
-                                                         multiplier:1.0f
-                                                           constant:10.0f]];
-    [self.view setNeedsUpdateConstraints];
-}
-
-
 
 #pragma mark - Read marker handling
 

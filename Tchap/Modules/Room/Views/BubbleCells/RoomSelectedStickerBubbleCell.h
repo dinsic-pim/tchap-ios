@@ -14,12 +14,12 @@
  limitations under the License.
  */
 
-#import "RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell.h"
+#import "RoomIncomingAttachmentWithPaginationTitleBubbleCell.h"
 
 /**
  `RoomSelectedStickerBubbleCell` is used to display the current selected sticker if any
  */
-@interface RoomSelectedStickerBubbleCell : RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell
+@interface RoomSelectedStickerBubbleCell : RoomIncomingAttachmentWithPaginationTitleBubbleCell
 
 @property (weak, nonatomic) IBOutlet UIView *descriptionContainerView;
 @property (weak, nonatomic) IBOutlet UIView *arrowView;

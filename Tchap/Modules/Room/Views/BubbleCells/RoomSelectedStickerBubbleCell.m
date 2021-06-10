@@ -16,13 +16,9 @@
 
 #import "RoomSelectedStickerBubbleCell.h"
 
-#import "RoomEncryptedDataBubbleCell.h"
-
 #import "RoomIncomingAttachmentBubbleCell.h"
 #import "RoomIncomingAttachmentWithoutSenderInfoBubbleCell.h"
 #import "RoomIncomingAttachmentWithPaginationTitleBubbleCell.h"
-#import "RoomIncomingEncryptedAttachmentBubbleCell.h"
-#import "RoomIncomingEncryptedAttachmentWithoutSenderInfoBubbleCell.h"
 
 #import "ThemeService.h"
 #import "GeneratedInterface-Swift.h"
@@ -64,7 +60,7 @@
         Class<MXKCellRendering> modelCellViewClass = nil;
         if (bubbleData.shouldHideSenderInformation)
         {
-            modelCellViewClass = bubbleData.isEncryptedRoom ? RoomIncomingEncryptedAttachmentWithoutSenderInfoBubbleCell.class : RoomIncomingAttachmentWithoutSenderInfoBubbleCell.class;
+            modelCellViewClass = RoomIncomingAttachmentWithoutSenderInfoBubbleCell.class;
             
             self.paginationTitleView.hidden = YES;
             self.pictureView.hidden = YES;
@@ -75,14 +71,14 @@
         {
             if (bubbleData.isPaginationFirstBubble)
             {
-                modelCellViewClass = bubbleData.isEncryptedRoom ? RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell.class : RoomIncomingAttachmentWithPaginationTitleBubbleCell.class;
+                modelCellViewClass = RoomIncomingAttachmentWithPaginationTitleBubbleCell.class;
                 
                 self.paginationTitleView.hidden = NO;
                 self.paginationLabel.text = [[bubbleData.eventFormatter dateStringFromDate:bubbleData.date withTime:NO] uppercaseString];
             }
             else
             {
-                modelCellViewClass = bubbleData.isEncryptedRoom ? RoomIncomingEncryptedAttachmentBubbleCell.class : RoomIncomingAttachmentBubbleCell.class;
+                modelCellViewClass = RoomIncomingAttachmentBubbleCell.class;
                 
                 self.paginationTitleView.hidden = YES;
             }
@@ -158,18 +154,6 @@
         // Adjust Attachment width constant
         self.attachViewWidthConstraint.constant = contentSize.width;
         
-        // Handle the encryption view
-        if (bubbleData.isEncryptedRoom)
-        {
-            // Set the right device info icon
-            self.encryptionStatusView.hidden = NO;
-            self.encryptionStatusView.image = [RoomEncryptedDataBubbleCell encryptionIconForBubbleComponent:component];
-        }
-        else
-        {
-            self.encryptionStatusView.hidden = YES;
-        }
-        
         // Hide by default the info container
         self.bubbleInfoContainer.hidden = YES;
         
@@ -202,17 +186,17 @@
     Class modelCellViewClass = nil;
     if (bubbleData.shouldHideSenderInformation)
     {
-        modelCellViewClass = bubbleData.isEncryptedRoom ? RoomIncomingEncryptedAttachmentWithoutSenderInfoBubbleCell.class : RoomIncomingAttachmentWithoutSenderInfoBubbleCell.class;
+        modelCellViewClass = RoomIncomingAttachmentWithoutSenderInfoBubbleCell.class;
     }
     else
     {
         if (bubbleData.isPaginationFirstBubble)
         {
-            modelCellViewClass = bubbleData.isEncryptedRoom ? RoomIncomingEncryptedAttachmentWithPaginationTitleBubbleCell.class : RoomIncomingAttachmentWithPaginationTitleBubbleCell.class;
+            modelCellViewClass = RoomIncomingAttachmentWithPaginationTitleBubbleCell.class;
         }
         else
         {
-            modelCellViewClass = bubbleData.isEncryptedRoom ? RoomIncomingEncryptedAttachmentBubbleCell.class : RoomIncomingAttachmentBubbleCell.class;
+            modelCellViewClass = RoomIncomingAttachmentBubbleCell.class;
         }
     }
     
